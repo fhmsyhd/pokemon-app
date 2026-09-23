@@ -1,5 +1,7 @@
 # Pokemon Compose App
 
+[![Android CI](https://github.com/fhmsyhd/pokemon-app/actions/workflows/android-ci.yml/badge.svg)](https://github.com/fhmsyhd/pokemon-app/actions/workflows/android-ci.yml)
+
 A modern Android application to explore Pokémon data, built entirely with **Jetpack Compose**, **MVVM architecture**, and **Hilt dependency injection**.
 
 This app demonstrates:
@@ -37,6 +39,24 @@ This app demonstrates:
 - **Lottie Animations**
 - **Coil Image Loading**
 - **Material3**
+
+---
+
+## Testing and CI
+
+The test suite covers:
+
+- Pokémon list loading, retry, search, and pagination behavior
+- Pokémon detail success and error states
+- Adding and removing local favorites
+- API, domain, and Room entity mapping
+- Use case delegation
+
+GitHub Actions runs unit tests, Android lint, and a debug build for every push and pull request to `main`. Test reports, lint reports, and the debug APK are uploaded as workflow artifacts.
+
+```bash
+./gradlew testDebugUnitTest lintDebug assembleDebug
+```
 
 ---
 

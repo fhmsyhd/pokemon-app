@@ -26,9 +26,12 @@ class PokemonDetailViewModel @Inject constructor(
     val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
 
     private var favoriteObserver: Job? = null
+    private var pokemonLoader: Job? = null
 
     fun loadPokemonInfo(name: String) {
-        viewModelScope.launch {
+        pokemonLoader?.cancel()
+        _pokemonInfo.value = Resource.Loading()
+        pokemonLoader = viewModelScope.launch {
             useCase.getPokemonInfo(name).collect { result ->
                 _pokemonInfo.value = result
                 if (result is Resource.Success) {

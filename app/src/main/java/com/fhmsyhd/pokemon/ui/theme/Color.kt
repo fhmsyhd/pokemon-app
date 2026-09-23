@@ -2,7 +2,13 @@ package com.fhmsyhd.pokemon.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val LightBlue = Color(0xFF5BA6F8)
+val PokedexRed = Color(0xFFE3350D)
+val PokedexBlue = Color(0xFF2A75BB)
+val PokedexYellow = Color(0xFFFFCB05)
+val PokedexBackground = Color(0xFFF6F7FB)
+val PokedexSurfaceVariant = Color(0xFFEEF1F6)
+val PokedexInk = Color(0xFF172033)
+val PokedexMuted = Color(0xFF667085)
 
 val HPColor = Color(0xFFF5FF00)
 val AtkColor = Color(1f, 0f, 0f, 0.66f)
