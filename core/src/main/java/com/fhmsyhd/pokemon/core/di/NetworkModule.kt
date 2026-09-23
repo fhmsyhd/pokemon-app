@@ -1,5 +1,6 @@
 package com.fhmsyhd.pokemon.core.di
 
+import com.fhmsyhd.pokemon.core.BuildConfig
 import com.fhmsyhd.pokemon.core.data.remote.network.ApiService
 import com.fhmsyhd.pokemon.core.util.Constant.BASE_URL
 import dagger.Module
@@ -17,8 +18,15 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()

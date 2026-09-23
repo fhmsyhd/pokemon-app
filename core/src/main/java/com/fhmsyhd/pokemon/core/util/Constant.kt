@@ -10,6 +10,5 @@ object Constant {
 
     // DB
     const val DATABASE_NAME = "pokemon_db"
-    const val PREF_NAME = "user_prefs"
-    const val TABLE_USER = "user_table"
+    const val TABLE_FAVORITE_POKEMON = "favorite_pokemon"
 }

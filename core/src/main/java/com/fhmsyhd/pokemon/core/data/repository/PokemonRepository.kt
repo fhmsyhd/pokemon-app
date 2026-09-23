@@ -1,19 +1,23 @@
 package com.fhmsyhd.pokemon.core.data.repository
 
 import com.fhmsyhd.pokemon.core.data.Resource
+import com.fhmsyhd.pokemon.core.data.local.dao.FavoritePokemonDao
 import com.fhmsyhd.pokemon.core.data.remote.network.ApiService
 import com.fhmsyhd.pokemon.core.domain.model.Pokemon
 import com.fhmsyhd.pokemon.core.domain.model.PokemonListEntry
 import com.fhmsyhd.pokemon.core.domain.repository.IPokemonRepository
 import com.fhmsyhd.pokemon.core.util.toDomain
+import com.fhmsyhd.pokemon.core.util.toFavoriteEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PokemonRepository @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val favoritePokemonDao: FavoritePokemonDao
 ) : IPokemonRepository {
     override fun getPokemonList(
         limit: Int,
@@ -39,6 +43,25 @@ class PokemonRepository @Inject constructor(
 
         } catch (e: Exception) {
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+        }
+    }
+
+    override fun getFavoritePokemon(): Flow<List<PokemonListEntry>> =
+        favoritePokemonDao.observeFavorites().map { favorites ->
+            favorites.map { it.toDomain() }
+        }
+
+    override fun isFavoritePokemon(number: Int): Flow<Boolean> =
+        favoritePokemonDao.observeIsFavorite(number)
+
+    override suspend fun setFavoritePokemon(
+        pokemon: PokemonListEntry,
+        isFavorite: Boolean
+    ) {
+        if (isFavorite) {
+            favoritePokemonDao.upsert(pokemon.toFavoriteEntity())
+        } else {
+            favoritePokemonDao.delete(pokemon.number)
         }
     }
 }

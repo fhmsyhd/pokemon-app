@@ -3,7 +3,7 @@ package com.fhmsyhd.pokemon.core.di
 import android.content.Context
 import androidx.room.Room
 import com.fhmsyhd.pokemon.core.data.local.AppDatabase
-import com.fhmsyhd.pokemon.core.data.local.dao.UserDao
+import com.fhmsyhd.pokemon.core.data.local.dao.FavoritePokemonDao
 import com.fhmsyhd.pokemon.core.util.Constant.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -25,12 +25,12 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             DATABASE_NAME
-        ).fallbackToDestructiveMigration()
+        ).fallbackToDestructiveMigration(dropAllTables = true)
             .build()
     }
 
     @Provides
-    fun provideUserDao(database: AppDatabase): UserDao {
-        return database.userDao()
+    fun provideFavoritePokemonDao(database: AppDatabase): FavoritePokemonDao {
+        return database.favoritePokemonDao()
     }
 }

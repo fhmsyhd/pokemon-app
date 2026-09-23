@@ -1,8 +1,8 @@
 package com.fhmsyhd.pokemon.util
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomNavItem(
@@ -13,11 +13,11 @@ sealed class BottomNavItem(
     object PokemonList : BottomNavItem(
         route = Routes.LIST,
         title = "Pokemon",
-        icon = Icons.Default.List
+        icon = Icons.AutoMirrored.Filled.List
     )
-    object Profile : BottomNavItem(
-        route = Routes.PROFILE,
-        title = "Profile",
-        icon = Icons.Default.Person
+    object Favorites : BottomNavItem(
+        route = Routes.FAVORITES,
+        title = "Favorites",
+        icon = Icons.Default.Favorite
     )
 }

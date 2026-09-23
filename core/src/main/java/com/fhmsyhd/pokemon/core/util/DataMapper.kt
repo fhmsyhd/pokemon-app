@@ -1,6 +1,6 @@
 package com.fhmsyhd.pokemon.core.util
 
-import com.fhmsyhd.pokemon.core.data.local.entity.UserEntity
+import com.fhmsyhd.pokemon.core.data.local.entity.FavoritePokemonEntity
 import com.fhmsyhd.pokemon.core.data.remote.response.PokemonResponse
 import com.fhmsyhd.pokemon.core.data.remote.response.ResultResponse
 import com.fhmsyhd.pokemon.core.data.remote.response.StatResponse
@@ -9,7 +9,6 @@ import com.fhmsyhd.pokemon.core.domain.model.Pokemon
 import com.fhmsyhd.pokemon.core.domain.model.PokemonListEntry
 import com.fhmsyhd.pokemon.core.domain.model.Stat
 import com.fhmsyhd.pokemon.core.domain.model.Type
-import com.fhmsyhd.pokemon.core.domain.model.User
 import com.fhmsyhd.pokemon.core.util.Constant.BASE_IMAGE_URL
 
 fun PokemonResponse.toDomain(): Pokemon {
@@ -52,16 +51,18 @@ fun ResultResponse.toDomain(): PokemonListEntry {
     )
 }
 
-fun User.toEntity(): UserEntity {
-    return UserEntity(
-        username = this.username,
-        password = this.password
+fun FavoritePokemonEntity.toDomain(): PokemonListEntry {
+    return PokemonListEntry(
+        pokemonName = pokemonName,
+        imageUrl = imageUrl,
+        number = number
     )
 }
 
-fun UserEntity.toDomain(): User {
-    return User(
-        username = username,
-        password = password
+fun PokemonListEntry.toFavoriteEntity(): FavoritePokemonEntity {
+    return FavoritePokemonEntity(
+        number = number,
+        pokemonName = pokemonName,
+        imageUrl = imageUrl
     )
 }

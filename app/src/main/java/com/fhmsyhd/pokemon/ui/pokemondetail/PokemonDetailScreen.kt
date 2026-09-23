@@ -3,7 +3,6 @@ package com.fhmsyhd.pokemon.ui.pokemondetail
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,8 +21,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -68,6 +70,7 @@ fun PokemonDetailScreen(
         viewModel.loadPokemonInfo(pokemonName)
     }
     val pokemonInfo by viewModel.pokemonInfo.collectAsState()
+    val isFavorite by viewModel.isFavorite.collectAsState()
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -76,6 +79,8 @@ fun PokemonDetailScreen(
     ) {
         PokemonDetailTopSection(
             navController = navController,
+            isFavorite = isFavorite,
+            onFavoriteClick = viewModel::toggleFavorite,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.2f)
@@ -118,10 +123,11 @@ fun PokemonDetailScreen(
 @Composable
 fun PokemonDetailTopSection(
     navController: NavController,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
-        contentAlignment = Alignment.TopStart,
         modifier = modifier
             .background(
                 Brush.verticalGradient(
@@ -132,17 +138,38 @@ fun PokemonDetailTopSection(
                 )
             )
     ) {
-        Icon(
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = null,
-            tint = Color.White,
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .size(36.dp)
-                .offset(16.dp, 16.dp)
-                .clickable {
-                    navController.popBackStack()
-                }
-        )
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            IconButton(onClick = { navController.popBackStack() }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+            IconButton(onClick = onFavoriteClick) {
+                Icon(
+                    imageVector = if (isFavorite) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
+                    },
+                    contentDescription = if (isFavorite) {
+                        "Remove from favorites"
+                    } else {
+                        "Add to favorites"
+                    },
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+        }
     }
 }
 

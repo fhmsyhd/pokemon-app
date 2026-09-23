@@ -2,14 +2,14 @@ package com.fhmsyhd.pokemon.core.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.fhmsyhd.pokemon.core.data.local.dao.UserDao
-import com.fhmsyhd.pokemon.core.data.local.entity.UserEntity
+import com.fhmsyhd.pokemon.core.data.local.dao.FavoritePokemonDao
+import com.fhmsyhd.pokemon.core.data.local.entity.FavoritePokemonEntity
 
 @Database(
-    entities = [UserEntity::class],
-    version = 1,
+    entities = [FavoritePokemonEntity::class],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
+    abstract fun favoritePokemonDao(): FavoritePokemonDao
 }

@@ -1,31 +1,28 @@
 # Pokemon Compose App
 
-A modern Android application to explore Pokémon data, built entirely with **Jetpack Compose**, **MVVM architecture**, and **Hilt dependency injection**.  
+A modern Android application to explore Pokémon data, built entirely with **Jetpack Compose**, **MVVM architecture**, and **Hilt dependency injection**.
 
 This app demonstrates:
 - **Clean architecture principles**
-- Local authentication with Room Database
-- Splash screen with auto-login
-- Bottom navigation (List & Profile)
+- Local favorites persisted with Room Database
+- Bottom navigation (Pokémon & Favorites)
 - Animated loaders using Lottie
 - Lazy grid Pokémon list with pagination
-- Detail screen for each Pokémon
+- Detail screen with favorite controls
 
 ---
 
 ## Features
 
-- Splash screen to check login state  
-- Login & Register flows with local persistence  
-- Home screen with bottom navigation:  
-- Pokémon List
-- User Profile  
-- Search and paginate Pokémon  
-- Detail view with dominant color extraction  
-- Logout flow that clears preferences  
-- Modern Compose UI components  
-- Hilt for DI  
-- Room for local data  
+- Home screen with bottom navigation
+- Pokémon list and locally persisted favorites
+- Search and paginate Pokémon
+- Detail view with dominant color extraction
+- Add or remove favorites from the detail screen
+- Dedicated empty and loading states
+- Modern Compose UI components
+- Hilt for DI
+- Room and Flow for reactive local data
 
 ---
 

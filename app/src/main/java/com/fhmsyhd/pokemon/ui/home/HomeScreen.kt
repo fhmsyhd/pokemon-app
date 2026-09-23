@@ -15,20 +15,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.fhmsyhd.pokemon.ui.favorites.FavoritesScreen
 import com.fhmsyhd.pokemon.ui.pokemonlist.PokemonListScreen
-import com.fhmsyhd.pokemon.ui.profile.ProfileScreen
 import com.fhmsyhd.pokemon.util.BottomNavItem
 
 @Composable
 fun HomeScreen(
-    onLogout: () -> Unit,
     onDetailNavigate: (Int, String) -> Unit
 ) {
     val navController = rememberNavController()
 
     val items = listOf(
         BottomNavItem.PokemonList,
-        BottomNavItem.Profile
+        BottomNavItem.Favorites
     )
 
     Scaffold(
@@ -69,8 +68,8 @@ fun HomeScreen(
                         onDetailNavigate(dominantColor, name)
                     }
                 )            }
-            composable(BottomNavItem.Profile.route) {
-                ProfileScreen(onLogout = onLogout)
+            composable(BottomNavItem.Favorites.route) {
+                FavoritesScreen(onNavigateToDetail = onDetailNavigate)
             }
         }
     }
