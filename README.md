@@ -60,6 +60,12 @@ GitHub Actions runs unit tests, Android lint, and a debug build for every push a
 
 ---
 
+## Portfolio Materials
+
+Copy-ready Upwork content, a website case study, and media-production guidance are available in [`docs/portfolio`](docs/portfolio/README.md).
+
+---
+
 ## Acknowledgements
 
 - [PokeAPI](https://pokeapi.co/) - Pokémon data provider
